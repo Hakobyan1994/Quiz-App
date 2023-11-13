@@ -1,0 +1,25 @@
+ body{
+    background-color: cornflowerblue !important;
+    min-height: 100vh;
+    
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+ }   
+    h1{
+        text-align: center;
+        margin-top: 12px !important;
+        color: cornsilk !important;
+        position: absolute;
+        top: 0;
+        left: 2px;
+    }    
+      
+    .questionDiv{
+     display: flex;
+     justify-content: space-between;
+  
+    }   
+     
