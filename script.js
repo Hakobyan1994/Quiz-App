@@ -68,47 +68,57 @@ let questions=[
    
 let rightAnswerQuestion=0;
 let currentQuestion=0;
- let audioSuccses = new Audio('Audio/succsess.mp3');
- let audiofailed=new Audio('Audio/failed.mp3')
+let audioSuccses = new Audio('Audio/succsess.mp3');
+let audiofailed=new Audio('Audio/failed.mp3')
    
      
    function init(){  
-      document.getElementById('all-questions').innerHTML=questions.length;//Array länge//
-        
-        showQuestion();
-      
-   };  
+      document.getElementById('all-questions').innerHTML=questions.length;//Array länge//        
+      showQuestion();
+   };    
       
      function showQuestion(){
-        if(currentQuestion>=questions.length){
-         document.getElementById('resultDiv').style='';
-         document.getElementById('main-container').style='display:none;';
-         document.getElementById('question-length').innerHTML=rightAnswerQuestion;
-         document.getElementById('resultQuestion').innerHTML= questions.length;
-         document.getElementById('image').src ='./img/cup.jpg';
+        if(gameisover()){
+          showEndscreen();
         } 
         else{
-          
-       let percent= (currentQuestion +1)  / questions.length;
-       percent=Math.round(percent*100);
-       document.getElementById('progress-bar').innerHTML=`${percent}%`;
-       document.getElementById('progress-bar').style=`width:${percent}%;`;
-       
-        
-          
-          
-        let question=questions[currentQuestion];
-
-         document.getElementById('question_Count').innerHTML=currentQuestion+1
-         document.getElementById('question-Text').innerHTML=question['question'];
-         document.getElementById('answer_1').innerHTML=question['answer_1'];
-         document.getElementById('answer_2').innerHTML=question['answer_2'];
-         document.getElementById('answer_3').innerHTML=question['answer_3'];
-         document.getElementById('answer_4').innerHTML=question['answer_4'];
+          progressbar();
+          comingTonextquestion();
         };
-     };   
-             
+     };     
 
+      function gameisover(){
+         return currentQuestion>=questions.length 
+      }
+              
+ 
+       function showEndscreen () {
+      document.getElementById('resultDiv').style='';
+      document.getElementById('main-container').style='display:none;';
+      document.getElementById('question-length').innerHTML=rightAnswerQuestion;
+      document.getElementById('resultQuestion').innerHTML= questions.length;
+      document.getElementById('image').src ='./img/cup.jpg';
+     }     
+        
+       
+        function progressbar(){
+     let percent= (currentQuestion +1)  / questions.length;
+     percent=Math.round(percent*100);
+     document.getElementById('progress-bar').innerHTML=`${percent}%`;
+     document.getElementById('progress-bar').style=`width:${percent}%;`;
+        }
+        
+     function comingTonextquestion(){
+      let question=questions[currentQuestion];
+       document.getElementById('question_Count').innerHTML=currentQuestion+1
+       document.getElementById('question-Text').innerHTML=question['question'];
+       document.getElementById('answer_1').innerHTML=question['answer_1'];
+       document.getElementById('answer_2').innerHTML=question['answer_2'];
+       document.getElementById('answer_3').innerHTML=question['answer_3'];
+       document.getElementById('answer_4').innerHTML=question['answer_4'];
+     }
+        
+    
         function answer (selection){  
           let question=questions[currentQuestion];
                       
@@ -129,7 +139,7 @@ let currentQuestion=0;
                   document.getElementById(selection).parentNode.classList.add('bg-danger');
                   document.getElementById(theIdOfRightAnswer).parentNode.classList.add('bg-success');
                //   document.getElementById('answer_1').parentNode.classList.add('bg-success') so kann man auch machen
-               audiofailed.play();
+                   audiofailed.play();
               };      
                    
                    document.getElementById('next-button').disabled = false;
@@ -138,17 +148,14 @@ let currentQuestion=0;
             
                     
                       
-
-
            function nextQuestion(){  
-            
             currentQuestion++; //erhöht den Wert auf  von dem ARRAY 
-            document.getElementById('next-button').disabled = true;
+            document.getElementById('next-button').disabled = true;   
             resetAnswercolor();
             showQuestion();   
            }    
    
-
+    
               
              function resetAnswercolor(){
                document.getElementById('answer_1').parentNode.classList.remove('bg-success')
