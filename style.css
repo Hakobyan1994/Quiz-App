@@ -21,5 +21,24 @@
      display: flex;
      justify-content: space-between;
   
-    }   
+    }     
      
+      .quiez_question:hover {
+   cursor: pointer; 
+   background-color:rgba(0,0,0,0.05)
+      }
+         
+         .active{
+            pointer-events:none;
+         }   
+
+         .bg-success,.bg-danger{
+            color:white !important;
+         } 
+           
+
+           .btn-Playagain{
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+           }
